@@ -17,7 +17,7 @@
       background: white;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
     }
     .language-selector {
       margin-bottom: 20px;
@@ -68,10 +68,6 @@
       'de': {
         title: "Häufige Fragen",
         questions: [
-          { question: "Wann ist das Frühstück?", answer: "Frühstück ist von 7:00 - 10:00 Uhr." },
-          { question: "Wie ist das WLAN-Passwort?", answer: "Das WLAN-Passwort lautet: Hotel123" },
-          { question: "Wo finde ich die Rezeption?", answer: "Die Rezeption ist rund um die Uhr besetzt." },
-          { question: "Welche Restaurants sind in der Nähe?", answer: "Hier finden Sie Restaurants in der Nähe: ..." },
           { question: "Fragen Sie die KI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } },
           { question: "Wann ist der Check-in?", answer: "15:00" },
           { question: "Wann check out?", answer: "10:00" },
@@ -89,51 +85,86 @@
       'en': {
         title: "Frequently Asked Questions",
         questions: [
-          { question: "What time is breakfast?", answer: "Breakfast is served from 7:00 AM to 10:00 AM." },
-          { question: "What is the Wi-Fi password?", answer: "The Wi-Fi password is: Hotel123" },
-          { question: "Where is the reception?", answer: "The reception is open 24/7." },
-          { question: "What restaurants are nearby?", answer: "Here are some nearby restaurants: ..." },
-          { question: "Ask the AI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+          { question: "Ask the AI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } },
+          { question: "What time is check-in?", answer: "15:00" },
+          { question: "What time is check-out?", answer: "10:00" },
+          { question: "Is free Wi-Fi available?", answer: "Yes: Willkommen2024" },
+          { question: "Are parking spaces available?", answer: "No, please park in municipal parking. They are free from 7:00 PM to 9:00 AM and all day Sunday." },
+          { question: "Are pets allowed?", answer: "No" },
+          { question: "Is the accommodation accessible?", answer: "No" },
+          { question: "Where can I have a good breakfast?", answer: "Residenzcafe or Hamma Bakery at the Residence" },
+          { question: "How can I pay on site?", answer: "Either in cash (label the envelope and put it in the praise and criticism mailbox) or by card. Instructions are attached to the card machine." },
+          { question: "How do I operate the oven?", answer: "First, turn on the temperature and function, then press the display for 4 seconds." },
+          { question: "Can I extend my stay?", answer: "You can check www.kemptencityhostplus.de and book directly. Please let us know that no cleaning is required and that we are informed." },
+          { question: "Name some good restaurants", answer: "The 5 best restaurants around the Residence in Kempten are: Schalander, Watami Skylounge, Zum Stift, Alpensteig, and La Strada." }
         ]
       },
       'nl': {
         title: "Veelgestelde Vragen",
         questions: [
-          { question: "Hoe laat is het ontbijt?", answer: "Het ontbijt wordt geserveerd van 7:00 tot 10:00 uur." },
-          { question: "Wat is het wifi-wachtwoord?", answer: "Het wifi-wachtwoord is: Hotel123" },
-          { question: "Waar is de receptie?", answer: "De receptie is 24 uur per dag bemand." },
-          { question: "Welke restaurants zijn in de buurt?", answer: "Hier vindt u restaurants in de buurt: ..." },
-          { question: "Vraag de AI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+          { question: "Vraag de AI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } },
+          { question: "Hoe laat is het inchecken?", answer: "15:00" },
+          { question: "Hoe laat is het uitchecken?", answer: "10:00" },
+          { question: "Is er gratis Wi-Fi beschikbaar?", answer: "Ja: Willkommen2024" },
+          { question: "Zijn er parkeerplaatsen beschikbaar?", answer: "Nee, parkeert u op gemeentelijke parkeerterreinen. Deze zijn van 19:00 tot 09:00 uur gratis en de hele zondag." },
+          { question: "Zijn huisdieren toegestaan?", answer: "Nee" },
+          { question: "Is de accommodatie toegankelijk?", answer: "Nee" },
+          { question: "Waar kan ik goed ontbijten?", answer: "Residenzcafe of de Hamma Bäckerei bij de Residenz" },
+          { question: "Hoe kan ik ter plaatse betalen?", answer: "Ofwel contant (beschrijf de envelop en doe hem in de lof- en kritiekbrievenbus) of met kaart. De instructies hangen bij het kaartapparaat." },
+          { question: "Hoe zet ik de oven aan?", answer: "Zet eerst de temperatuur en functie aan, druk dan 4 seconden op het display." },
+          { question: "Kan ik mijn verblijf verlengen?", answer: "U kunt dat zien op www.kemptencityhostplus.de en direct boeken. Laat ons weten dat er niet schoongemaakt hoeft te worden en dat we geïnformeerd zijn." },
+          { question: "Noem een paar goede restaurants", answer: "De 5 beste restaurants rond de Residenz in Kempten zijn: Schalander, Watami Skylounge, Zum Stift, Alpensteig en La Strada." }
         ]
       },
       'it': {
         title: "Domande Frequenti",
         questions: [
-          { question: "A che ora è la colazione?", answer: "La colazione è servita dalle 7:00 alle 10:00." },
-          { question: "Qual è la password del Wi-Fi?", answer: "La password del Wi-Fi è: Hotel123" },
-          { question: "Dove si trova la reception?", answer: "La reception è aperta 24 ore su 24." },
-          { question: "Quali ristoranti sono nelle vicinanze?", answer: "Qui troverete ristoranti nelle vicinanze: ..." },
-          { question: "Chiedi all'IA", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+          { question: "Chiedi all'IA", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } },
+          { question: "A che ora è il check-in?", answer: "15:00" },
+          { question: "A che ora è il check-out?", answer: "10:00" },
+          { question: "C'è Wi-Fi gratuito?", answer: "Sì: Willkommen2024" },
+          { question: "Sono disponibili parcheggi?", answer: "No, per favore parcheggia nei parcheggi comunali. Questi sono gratuiti dalle 19:00 alle 09:00 e per tutta la domenica." },
+          { question: "Gli animali domestici sono ammessi?", answer: "No" },
+          { question: "La sistemazione è accessibile?", answer: "No" },
+          { question: "Dove posso fare una buona colazione?", answer: "Residenzcafe o la Hamma Bäckerei presso la Residenz" },
+          { question: "Come posso pagare in loco?", answer: "O in contanti (etichetta l'involucro e mettilo nella cassetta dei commenti) oppure con carta. Le istruzioni sono attaccate al dispositivo per le carte." },
+          { question: "Come si accende il forno?", answer: "Accendi prima la temperatura e la funzione, poi premi il display per 4 secondi." },
+          { question: "Posso prolungare il mio soggiorno?", answer: "Puoi controllare su www.kemptencityhostplus.de e prenotare direttamente. Facci sapere che non è necessaria la pulizia e che siamo informati." },
+          { question: "Nomina alcuni buoni ristoranti", answer: "I 5 migliori ristoranti intorno alla Residenz di Kempten sono: Schalander, Watami Skylounge, Zum Stift, Alpensteig e La Strada." }
         ]
       },
       'pl': {
         title: "Najczęściej Zadawane Pytania",
         questions: [
-          { question: "O której godzinie jest śniadanie?", answer: "Śniadanie jest serwowane od 7:00 do 10:00." },
-          { question: "Jakie jest hasło do Wi-Fi?", answer: "Hasło do Wi-Fi to: Hotel123" },
-          { question: "Gdzie znajduje się recepcja?", answer: "Recepcja jest czynna 24 godziny na dobę." },
-          { question: "Jakie restauracje są w pobliżu?", answer: "Tutaj znajdziesz restauracje w pobliżu: ..." },
-          { question: "Zapytaj SI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+          { question: "Zapytaj SI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } },
+          { question: "O której godzinie jest zameldowanie?", answer: "15:00" },
+          { question: "O której godzinie jest wymeldowanie?", answer: "10:00" },
+          { question: "Czy jest dostępne darmowe Wi-Fi?", answer: "Tak: Willkommen2024" },
+          { question: "Czy są dostępne miejsca parkingowe?", answer: "Nie, proszę parkować na parkingach miejskich. Są one darmowe od 19:00 do 09:00 oraz przez całą niedzielę." },
+          { question: "Czy zwierzęta domowe są dozwolone?", answer: "Nie" },
+          { question: "Czy obiekt jest przystosowany dla osób niepełnosprawnych?", answer: "Nie" },
+          { question: "Gdzie mogę dobrze zjeść śniadanie?", answer: "Residenzcafe lub Hamma Bäckerei przy Residenz" },
+          { question: "Jak mogę zapłacić na miejscu?", answer: "Albo gotówką (opisz kopertę i włóż do skrzynki na pochwały i krytykę) albo kartą. Instrukcja znajduje się przy urządzeniu do kart." },
+          { question: "Jak włączyć piekarnik?", answer: "Najpierw włącz temperaturę i funkcję, potem naciśnij wyświetlacz przez 4 sekundy." },
+          { question: "Czy mogę przedłużyć pobyt?", answer: "Możesz sprawdzić na www.kemptencityhostplus.de i bezpośrednio zarezerwować. Proszę poinformuj nas, że nie trzeba sprzątać i że jesteśmy poinformowani." },
+          { question: "Podaj mi dobre restauracje", answer: "5 najlepszych restauracji wokół Residenz w Kempten to: Schalander, Watami Skylounge, Zum Stift, Alpensteig i La Strada." }
         ]
       },
       'fr': {
         title: "Questions Fréquentes",
         questions: [
-          { question: "À quelle heure est le petit-déjeuner ?", answer: "Le petit-déjeuner est servi de 7h00 à 10h00." },
-          { question: "Quel est le mot de passe Wi-Fi ?", answer: "Le mot de passe Wi-Fi est: Hotel123" },
-          { question: "Où se trouve la réception ?", answer: "La réception est ouverte 24h/24." },
-          { question: "Quels restaurants sont à proximité ?", answer: "Voici quelques restaurants à proximité: ..." },
-          { question: "Demandez à l'IA", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+          { question: "Demandez à l'IA", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } },
+          { question: "À quelle heure est l'enregistrement?", answer: "15:00" },
+          { question: "À quelle heure est le départ?", answer: "10:00" },
+          { question: "Y a-t-il du Wi-Fi gratuit?", answer: "Oui: Willkommen2024" },
+          { question: "Y a-t-il des places de parking disponibles?", answer: "Non, veuillez vous garer sur des parkings municipaux. Ils sont gratuits de 19h00 à 09h00 et toute la journée du dimanche." },
+          { question: "Les animaux domestiques sont-ils autorisés?", answer: "Non" },
+          { question: "L'hébergement est-il accessible?", answer: "Non" },
+          { question: "Où puis-je prendre un bon petit-déjeuner?", answer: "Residenzcafe ou la Hamma Bäckerei à la Residenz" },
+          { question: "Comment puis-je payer sur place?", answer: "Soit en espèces (étiquetez l'enveloppe et mettez-la dans la boîte aux lettres pour compliments et critiques) soit par carte. Les instructions sont sur le terminal de paiement." },
+          { question: "Comment allumer le four?", answer: "Allumez d'abord la température et la fonction, puis appuyez sur l'écran pendant 4 secondes." },
+          { question: "Puis-je prolonger mon séjour?", answer: "Vous pouvez consulter www.kemptencityhostplus.de et réserver directement. Veuillez nous informer que le ménage n'est pas nécessaire et que nous sommes informés." },
+          { question: "Nommez quelques bons restaurants", answer: "Les 5 meilleurs restaurants autour de la Résidence à Kempten sont : Schalander, Watami Skylounge, Zum Stift, Alpensteig et La Strada." }
         ]
       }
     };
@@ -141,13 +172,8 @@
     function updateFAQs() {
       var faqTitle = document.getElementById('faq-title');
       var faqButtons = document.getElementById('faq-buttons');
-      // Bestehende Buttons leeren
       faqButtons.innerHTML = '';
-
-      // Titel aktualisieren
       faqTitle.textContent = faqs[currentLanguage].title;
-
-      // FAQ-Buttons erstellen
       faqs[currentLanguage].questions.forEach(function(item) {
         var btn = document.createElement('button');
         btn.textContent = item.question;
@@ -167,7 +193,6 @@
       updateFAQs();
     }
 
-    // FAQs initial mit Standardsprache (Deutsch) anzeigen
     updateFAQs();
   </script>
 </body>
