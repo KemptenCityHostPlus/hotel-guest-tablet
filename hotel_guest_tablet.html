@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Gäste-Tablet</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .faq-container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-        button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hotel Gäste-Tablet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .faq-container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .language-selector {
+      margin-bottom: 20px;
+    }
+    .language-selector img {
+      width: 40px;
+      height: 40px;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <div class="faq-container">
-        <h2>Häufige Fragen</h2>
-        <button onclick="alert('Frühstück ist von 7:00 - 10:00 Uhr.')">Wann ist das Frühstück?</button>
-        <button onclick="alert('Das WLAN-Passwort lautet: Hotel123')">Wie ist das WLAN-Passwort?</button>
-        <button onclick="alert('Die Rezeption ist rund um die Uhr besetzt.')">Wo finde ich die Rezeption?</button>
-        <button onclick="alert('Hier finden Sie Restaurants in der Nähe: ...')">Welche Restaurants sind in der Nähe?</button>
-        <button onclick="window.open('https://chat.openai.com/', '_blank')">Fragen Sie die KI</button>
-    </div>
-</body>
-</html>
+  <div class="faq-container">
+    <div class="language-selector">
+      <img src="https://flagcdn.com/nl.svg" alt="Nederlands" title="Nederlands" onclick="changeLanguage('nl')">
+      <img src="https://flagcdn.com/gb.svg" alt="English" title="English" onclick="changeLanguage('en')">
+      <img src="https://flagcdn.com/it.svg" alt="It
