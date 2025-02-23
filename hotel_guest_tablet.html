@@ -68,12 +68,11 @@
     button:hover {
       background: #0056b3;
     }
-    /* Such-Widget (fest rechts) */
+    /* Such-Widget (oben rechts) */
     .search-widget {
       position: fixed;
-      top: 50%;
+      top: 20px;
       right: 20px;
-      transform: translateY(-50%);
       background: #fff;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -106,11 +105,14 @@
     .search-result-item {
       padding: 5px;
       border-bottom: 1px solid #eee;
+      cursor: pointer;
     }
     .search-result-item:last-child {
       border-bottom: none;
     }
   </style>
+  <!-- Fuse.js für erweiterte (fuzzy) Suche einbinden -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.min.js"></script>
 </head>
 <body>
   <!-- Logo -->
@@ -140,7 +142,7 @@
     </div>
   </div>
   
-  <!-- Such-Widget (rechts) -->
+  <!-- Such-Widget (oben rechts) -->
   <div class="search-widget">
     <div>
       <input type="text" id="search-input" placeholder="Stellen Sie Ihre Frage...">
@@ -152,6 +154,7 @@
   <script>
     var currentLanguage = 'de'; // Standard: Deutsch
 
+    // FAQ-Daten inklusive zusätzlicher Keywords (z. B. für Parkplatz-Suche)
     var faqs = {
       'de': {
         title: "Häufige Fragen",
@@ -160,7 +163,11 @@
           { question: "Wann ist der Check-in?", answer: "15:00" },
           { question: "Wann check out?", answer: "10:00" },
           { question: "Gibt es kostenloses WLAN?", answer: "Ja: Willkommen2024" },
-          { question: "Sind Parkplätze verfügbar?", answer: "Nein, bitte parke auf städtischen Parkplätzen. Diese sind abends ab 19:00 bis morgens 09:00 kostenlos sowie den ganzen Sonntag." },
+          { 
+            question: "Sind Parkplätze verfügbar?", 
+            answer: "Nein, bitte parke auf städtischen Parkplätzen. Diese sind abends ab 19:00 bis morgens 09:00 kostenlos sowie den ganzen Sonntag.", 
+            keywords: ["parken", "parkplätze", "wo kann ich parken"]
+          },
           { question: "Sind Haustiere erlaubt?", answer: "Nein" },
           { question: "Ist die Unterkunft barrierefrei?", answer: "Nein" },
           { question: "Wo kann ich gut frühstücken?", answer: "Residenzcafe oder die Hamma Bäckerei an der Residenz" },
@@ -257,6 +264,12 @@
       }
     };
 
+    // Fuse.js Optionen erweitern: zusätzlich werden auch Keywords durchsucht.
+    var fuseOptions = {
+      keys: ['question', 'answer', 'keywords'],
+      threshold: 0.3
+    };
+
     function updateFAQs() {
       var faqTitle = document.getElementById('faq-title');
       var faqButtons = document.getElementById('faq-buttons');
@@ -279,39 +292,36 @@
     function changeLanguage(lang) {
       currentLanguage = lang;
       updateFAQs();
-      // Le Suchergebnisbereich leeren, wenn die Sprache gewechselt wird.
+      // Suchergebnisbereich und Suchfeld leeren
       document.getElementById('search-results').innerHTML = "";
       document.getElementById('search-input').value = "";
     }
 
-    // Suchfunktion, die in den FAQ-Fragen des aktuellen Sprachkatalogs sucht.
+    // Erweiterte Suchfunktion mittels Fuse.js (Fuzzy Search)
     function searchFAQ() {
-      var query = document.getElementById('search-input').value.toLowerCase();
+      var query = document.getElementById('search-input').value;
       var resultsDiv = document.getElementById('search-results');
       resultsDiv.innerHTML = "";
       if (!query) {
         resultsDiv.innerText = "Bitte geben Sie eine Frage ein.";
         return;
       }
-      var matches = [];
-      // Suche in den FAQ-Fragen der aktuell ausgewählten Sprache.
-      faqs[currentLanguage].questions.forEach(function(item) {
-        if (item.question.toLowerCase().indexOf(query) !== -1 || item.answer.toLowerCase().indexOf(query) !== -1) {
-          matches.push(item);
-        }
-      });
-      if (matches.length === 0) {
+      // Fuse-Instanz erstellen für den aktuellen FAQ-Katalog
+      var fuse = new Fuse(faqs[currentLanguage].questions, fuseOptions);
+      var results = fuse.search(query);
+      if (results.length === 0) {
         resultsDiv.innerHTML = "<em>Keine passenden Ergebnisse gefunden.</em>";
       } else {
-        matches.forEach(function(match) {
+        results.forEach(function(result) {
+          var item = result.item;
           var resultItem = document.createElement('div');
           resultItem.className = "search-result-item";
-          resultItem.innerHTML = "<strong>" + match.question + "</strong><br>" + (match.answer ? match.answer : "Antwort über KI verfügbar");
+          resultItem.innerHTML = "<strong>" + item.question + "</strong><br>" + (item.answer ? item.answer : "Antwort über KI verfügbar");
           resultItem.onclick = function() {
-            if (match.action) {
-              match.action();
+            if (item.action) {
+              item.action();
             } else {
-              alert(match.answer);
+              alert(item.answer);
             }
           };
           resultsDiv.appendChild(resultItem);
