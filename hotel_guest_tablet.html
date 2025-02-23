@@ -57,4 +57,107 @@
     </div>
     <h2 id="faq-title">Häufige Fragen</h2>
     <div id="faq-buttons">
-      <!-- FAQ-Bu
+      <!-- FAQ-Buttons werden hier per JavaScript eingefügt -->
+    </div>
+  </div>
+
+  <script>
+    var currentLanguage = 'de'; // Standard: Deutsch
+
+    var faqs = {
+      'de': {
+        title: "Häufige Fragen",
+        questions: [
+          { question: "Wann ist das Frühstück?", answer: "Frühstück ist von 7:00 - 10:00 Uhr." },
+          { question: "Wie ist das WLAN-Passwort?", answer: "Das WLAN-Passwort lautet: Hotel123" },
+          { question: "Wo finde ich die Rezeption?", answer: "Die Rezeption ist rund um die Uhr besetzt." },
+          { question: "Welche Restaurants sind in der Nähe?", answer: "Hier finden Sie Restaurants in der Nähe: ..." },
+          { question: "Fragen Sie die KI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+        ]
+      },
+      'en': {
+        title: "Frequently Asked Questions",
+        questions: [
+          { question: "What time is breakfast?", answer: "Breakfast is served from 7:00 AM to 10:00 AM." },
+          { question: "What is the Wi-Fi password?", answer: "The Wi-Fi password is: Hotel123" },
+          { question: "Where is the reception?", answer: "The reception is open 24/7." },
+          { question: "What restaurants are nearby?", answer: "Here are some nearby restaurants: ..." },
+          { question: "Ask the AI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+        ]
+      },
+      'nl': {
+        title: "Veelgestelde Vragen",
+        questions: [
+          { question: "Hoe laat is het ontbijt?", answer: "Het ontbijt wordt geserveerd van 7:00 tot 10:00 uur." },
+          { question: "Wat is het wifi-wachtwoord?", answer: "Het wifi-wachtwoord is: Hotel123" },
+          { question: "Waar is de receptie?", answer: "De receptie is 24 uur per dag bemand." },
+          { question: "Welke restaurants zijn in de buurt?", answer: "Hier vindt u restaurants in de buurt: ..." },
+          { question: "Vraag de AI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+        ]
+      },
+      'it': {
+        title: "Domande Frequenti",
+        questions: [
+          { question: "A che ora è la colazione?", answer: "La colazione è servita dalle 7:00 alle 10:00." },
+          { question: "Qual è la password del Wi-Fi?", answer: "La password del Wi-Fi è: Hotel123" },
+          { question: "Dove si trova la reception?", answer: "La reception è aperta 24 ore su 24." },
+          { question: "Quali ristoranti sono nelle vicinanze?", answer: "Qui troverete ristoranti nelle vicinanze: ..." },
+          { question: "Chiedi all'IA", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+        ]
+      },
+      'pl': {
+        title: "Najczęściej Zadawane Pytania",
+        questions: [
+          { question: "O której godzinie jest śniadanie?", answer: "Śniadanie jest serwowane od 7:00 do 10:00." },
+          { question: "Jakie jest hasło do Wi-Fi?", answer: "Hasło do Wi-Fi to: Hotel123" },
+          { question: "Gdzie znajduje się recepcja?", answer: "Recepcja jest czynna 24 godziny na dobę." },
+          { question: "Jakie restauracje są w pobliżu?", answer: "Tutaj znajdziesz restauracje w pobliżu: ..." },
+          { question: "Zapytaj SI", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+        ]
+      },
+      'fr': {
+        title: "Questions Fréquentes",
+        questions: [
+          { question: "À quelle heure est le petit-déjeuner ?", answer: "Le petit-déjeuner est servi de 7h00 à 10h00." },
+          { question: "Quel est le mot de passe Wi-Fi ?", answer: "Le mot de passe Wi-Fi est: Hotel123" },
+          { question: "Où se trouve la réception ?", answer: "La réception est ouverte 24h/24." },
+          { question: "Quels restaurants sont à proximité ?", answer: "Voici quelques restaurants à proximité: ..." },
+          { question: "Demandez à l'IA", answer: "", action: function() { window.open('https://chat.openai.com/', '_blank'); } }
+        ]
+      }
+    };
+
+    function updateFAQs() {
+      var faqTitle = document.getElementById('faq-title');
+      var faqButtons = document.getElementById('faq-buttons');
+      // Bestehende Buttons leeren
+      faqButtons.innerHTML = '';
+
+      // Titel aktualisieren
+      faqTitle.textContent = faqs[currentLanguage].title;
+
+      // FAQ-Buttons erstellen
+      faqs[currentLanguage].questions.forEach(function(item) {
+        var btn = document.createElement('button');
+        btn.textContent = item.question;
+        btn.onclick = function() {
+          if (item.action) {
+            item.action();
+          } else {
+            alert(item.answer);
+          }
+        };
+        faqButtons.appendChild(btn);
+      });
+    }
+
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      updateFAQs();
+    }
+
+    // FAQs initial mit Standardsprache (Deutsch) anzeigen
+    updateFAQs();
+  </script>
+</body>
+</html>
