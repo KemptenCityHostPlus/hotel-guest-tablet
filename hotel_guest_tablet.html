@@ -11,6 +11,28 @@
       padding: 20px;
       background-color: #f4f4f4;
     }
+    .logo {
+      margin-bottom: 20px;
+    }
+    .logo img {
+      max-width: 150px;
+      height: auto;
+    }
+    .weather-widget {
+      background: #007bff;
+      color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    .weather-widget h3 {
+      margin: 0 0 10px 0;
+      padding: 0;
+    }
+    .weather-widget img {
+      vertical-align: middle;
+    }
     .faq-container {
       max-width: 600px;
       margin: auto;
@@ -46,6 +68,18 @@
   </style>
 </head>
 <body>
+  <!-- Logo -->
+  <div class="logo">
+    <img src="https://www.kemptencityhostplus.de/favicon.ico" alt="KemptenCityHostPlus Logo">
+  </div>
+  
+  <!-- Wetter-Widget -->
+  <div class="weather-widget">
+    <h3>Aktuelles Wetter in Kempten im Allgäu</h3>
+    <div id="weather-info">Lade Wetterdaten...</div>
+  </div>
+  
+  <!-- FAQ-Bereich -->
   <div class="faq-container">
     <div class="language-selector">
       <img src="https://flagcdn.com/de.svg" alt="Deutsch" title="Deutsch" onclick="changeLanguage('de')">
@@ -64,6 +98,7 @@
   <script>
     var currentLanguage = 'de'; // Standard: Deutsch
 
+    // Alle Sprachen mit dem gleichen vollständigen Fragenkatalog (insgesamt 12 Fragen)
     var faqs = {
       'de': {
         title: "Häufige Fragen",
@@ -193,7 +228,33 @@
       updateFAQs();
     }
 
+    // Wetterdaten mit OpenWeatherMap abrufen
+    function updateWeather() {
+      var weatherInfoDiv = document.getElementById("weather-info");
+      // Falls du keinen API-Key nutzen möchtest, kannst du diesen Teil auskommentieren
+      var apiKey = "YOUR_API_KEY"; // API-Key hier eintragen (z. B. von OpenWeatherMap)
+      if (!apiKey || apiKey === "YOUR_API_KEY") {
+        weatherInfoDiv.innerText = "Wetterdaten nicht verfügbar (API-Key fehlt)";
+        return;
+      }
+      var url = "https://api.openweathermap.org/data/2.5/weather?q=Kempten,de&units=metric&lang=de&appid=" + apiKey;
+      
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          var temperature = data.main.temp;
+          var description = data.weather[0].description;
+          var iconCode = data.weather[0].icon;
+          var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+          weatherInfoDiv.innerHTML = `<img src="${iconUrl}" alt="Wettericon"><br><strong>${temperature.toFixed(1)}°C</strong><br>${description}`;
+        })
+        .catch(error => {
+          weatherInfoDiv.innerText = "Wetterdaten konnten nicht geladen werden.";
+        });
+    }
+
     updateFAQs();
+    updateWeather();
   </script>
 </body>
 </html>
