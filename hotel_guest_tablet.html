@@ -10,6 +10,7 @@
       text-align: center;
       padding: 20px;
       background-color: #f4f4f4;
+      margin-right: 300px; /* Platz für das Such-Widget */
     }
     .logo {
       margin-bottom: 20px;
@@ -67,6 +68,48 @@
     button:hover {
       background: #0056b3;
     }
+    /* Such-Widget (fest rechts) */
+    .search-widget {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      width: 250px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+      z-index: 1000;
+      text-align: left;
+    }
+    .search-widget input[type="text"] {
+      width: 80%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .search-widget button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    .search-results {
+      margin-top: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    .search-result-item {
+      padding: 5px;
+      border-bottom: 1px solid #eee;
+    }
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
   </style>
 </head>
 <body>
@@ -95,6 +138,15 @@
     <div id="faq-buttons">
       <!-- FAQ-Buttons werden hier per JavaScript eingefügt -->
     </div>
+  </div>
+  
+  <!-- Such-Widget (rechts) -->
+  <div class="search-widget">
+    <div>
+      <input type="text" id="search-input" placeholder="Stellen Sie Ihre Frage...">
+      <button onclick="searchFAQ()">🔍</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
   </div>
 
   <script>
@@ -227,6 +279,44 @@
     function changeLanguage(lang) {
       currentLanguage = lang;
       updateFAQs();
+      // Le Suchergebnisbereich leeren, wenn die Sprache gewechselt wird.
+      document.getElementById('search-results').innerHTML = "";
+      document.getElementById('search-input').value = "";
+    }
+
+    // Suchfunktion, die in den FAQ-Fragen des aktuellen Sprachkatalogs sucht.
+    function searchFAQ() {
+      var query = document.getElementById('search-input').value.toLowerCase();
+      var resultsDiv = document.getElementById('search-results');
+      resultsDiv.innerHTML = "";
+      if (!query) {
+        resultsDiv.innerText = "Bitte geben Sie eine Frage ein.";
+        return;
+      }
+      var matches = [];
+      // Suche in den FAQ-Fragen der aktuell ausgewählten Sprache.
+      faqs[currentLanguage].questions.forEach(function(item) {
+        if (item.question.toLowerCase().indexOf(query) !== -1 || item.answer.toLowerCase().indexOf(query) !== -1) {
+          matches.push(item);
+        }
+      });
+      if (matches.length === 0) {
+        resultsDiv.innerHTML = "<em>Keine passenden Ergebnisse gefunden.</em>";
+      } else {
+        matches.forEach(function(match) {
+          var resultItem = document.createElement('div');
+          resultItem.className = "search-result-item";
+          resultItem.innerHTML = "<strong>" + match.question + "</strong><br>" + (match.answer ? match.answer : "Antwort über KI verfügbar");
+          resultItem.onclick = function() {
+            if (match.action) {
+              match.action();
+            } else {
+              alert(match.answer);
+            }
+          };
+          resultsDiv.appendChild(resultItem);
+        });
+      }
     }
 
     updateFAQs();
